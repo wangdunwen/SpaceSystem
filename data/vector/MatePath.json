@@ -1,0 +1,40 @@
+{
+  "contact": [
+    {
+      "id": "user1",
+      "name":"",
+      "coordinate": [[90, 40, 0], [45, 35, 0], [25, 35, 0], [5, 5, 0]],
+      "imageUrl": "./resources/head/wjl.png"
+    },
+    {
+      "id": "user2",
+      "name":"",
+      "coordinate": [[50, 20, 0], [30, 25, 0], [20, 10, 0], [10, 10, 0]],
+      "imageUrl": "./resources/head/yhw.png"
+    },
+    {
+      "id": "user3",
+      "name":"",
+      "coordinate": [[50, 40, 0], [43, 31, 0], [22, 15, 0], [10, 30, 0]],
+      "imageUrl": "./resources/head/wz.png"
+    },
+    {
+      "id": "user4",
+      "name":"",
+      "coordinate": [[75, 20, 0], [65, 35, 0], [45, 25, 0], [20, 30, 0]],
+      "imageUrl": "./resources/head/qm.png"
+    },
+    {
+      "id": "user5",
+      "name":"",
+      "coordinate": [[125, 40, 0], [110, 35, 0], [100, 22, 0], [90, 20, 0]],
+      "imageUrl": "./resources/head/zzl.png"
+    },
+    {
+      "id": "user6",
+      "name":"",
+      "coordinate": [[105, 40, 0], [90, 50, 0], [80, 30, 0], [70, 40, 0]],
+      "imageUrl": "./resources/head/wf.png"
+    }
+  ]
+}

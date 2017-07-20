@@ -1,0 +1,1 @@
+define(function(){var e=function(){this.clickListener=new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas),this.clickListener.setInputAction(function(e){var n=getPosition(e);viewer.scene.pick(n);var i=viewer.scene.pick(n);if(Cesium.defined(i)){var c=i.id;console.log("点击的实体为:"+c.name)}},Cesium.ScreenSpaceEventType.LEFT_DOWN)};return e});

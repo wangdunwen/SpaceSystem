@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<kml xmlns="http://earth.google.com/kml/2.1">
+	  <Document>
+	    <Name>9/907/355.kml</Name>
+	    <Description></Description>
+	    <Style>
+	      <ListStyle id="hideChildren">
+	        <listItemType>checkHideChildren</listItemType>
+	      </ListStyle>
+	    </Style>
+	    <Region>
+	      <Lod>
+	        <minLodPixels>32</minLodPixels>
+	        <maxLodPixels>520</maxLodPixels>
+	      </Lod>
+	      <LatLonAltBox>
+	        <north>35.15625000000000</north>
+	        <south>34.80468750000000</south>
+	        <east>139.21875000000000</east>
+	        <west>138.86718750000000</west>
+	      </LatLonAltBox>
+	    </Region>
+	    <GroundOverlay>
+	      <drawOrder>18</drawOrder>
+	      <Icon>
+	        <href>355.terrain</href>
+	      </Icon>
+	      <LatLonBox>
+	        <north>35.15625000000000</north>
+	        <south>34.80468750000000</south>
+	        <east>139.21875000000000</east>
+	        <west>138.86718750000000</west>
+	      </LatLonBox>
+	    </GroundOverlay>
+	
+	    <NetworkLink>
+	      <name>10/1814/711.terrain</name>
+	      <Region>
+	        <Lod>
+	          <minLodPixels>32</minLodPixels>
+	          <maxLodPixels>-1</maxLodPixels>
+	        </Lod>
+	        <LatLonAltBox>
+	          <north>35.15625000000000</north>
+	          <south>34.98046875000000</south>
+	          <east>139.04296875000000</east>
+	          <west>138.86718750000000</west>
+	        </LatLonAltBox>
+	      </Region>
+	      <Link>
+	        <href>../../10/1814/711.kml</href>
+	        <viewRefreshMode>onRegion</viewRefreshMode>
+	        <viewFormat/>
+	      </Link>
+	    </NetworkLink>
+		  </Document>
+	</kml>
+	

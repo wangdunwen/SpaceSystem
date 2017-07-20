@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tilemap tilemapservice="http://www.osgeo.org/services/tilemapservice.xml" version="1.0.0">
+    <title>高程区域影像数据_TMS</title>
+    <abstract/>
+    <srs>OSGEO:41001</srs>
+    <vsrs/>
+    <boundingbox maxx="9724109.733594892546535" maxy="3286048.236830353736877" minx="9562674.721894472837448" miny="3116051.993933886289597"/>
+    <origin x="-20037508.3427890" y="-20037508.3427890"/>
+    <tileformat extension="jpg" height="256" mime-type="image/jpg" width="256"/>
+    <tilesets profile="global-mercator">
+        <tileset href="" order="0" units-per-pixel="78271.5169640205"/>
+        <tileset href="" order="1" units-per-pixel="39135.7584820102"/>
+        <tileset href="" order="2" units-per-pixel="19567.8792410051"/>
+        <tileset href="" order="3" units-per-pixel="9783.9396205026"/>
+        <tileset href="" order="4" units-per-pixel="4891.9698102513"/>
+        <tileset href="" order="5" units-per-pixel="2445.9849051256"/>
+        <tileset href="" order="6" units-per-pixel="1222.9924525628"/>
+        <tileset href="" order="7" units-per-pixel="611.4962262814"/>
+        <tileset href="" order="8" units-per-pixel="305.7481131407"/>
+        <tileset href="" order="9" units-per-pixel="152.8740565704"/>
+        <tileset href="" order="10" units-per-pixel="76.4370282852"/>
+        <tileset href="" order="11" units-per-pixel="38.2185141426"/>
+        <tileset href="" order="12" units-per-pixel="19.1092570713"/>
+    </tilesets>
+    <tileset/>
+</tilemap>

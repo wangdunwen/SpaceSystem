@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!--应用占满浏览器，适配屏幕分辨率-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <title>空间数据处理系统</title>
+    <script type="text/javascript" src="libs/jquery/jquery.js"></script>
+    <script type="text/javascript" src="libs/bootstrap/bootstrap.js"></script>
+    <style>
+        /*@import url(libs/bootstrap/bootstrap-theme.css);*/
+        @import url(libs/bootstrap/bootstrap.css);
+        html {
+            height:100%;
+        }
+
+        body {
+            background: url(resources/images/background.jpg) no-repeat;
+            padding: 0;
+            margin: 0;
+            width:100%;
+            height:100%;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="row clearfix">
+        <h1 class="text-center" style="margin-top: 100px;color: white;font-size: 4.0em;">
+                空 间 数 据 处 理 系 统
+        </h1>
+        <div class="col-md-12 column" style="top: 40%; left: 72%;right: 5%;position: absolute;padding-top: 20px;padding-bottom: 20px;background-color: #9acfea;">
+            <div style="width: 30%;padding: 5px;margin-top:5px;">
+                <div class="col-sm-10">
+                    <div class="input-group">
+                        <span class="input-group-addon">用户：</span>
+                        <input type="text" class="form-control" id="inputUser3" placeholder="请输入用户名" />
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div style="width: 30%;padding: 5px;margin-top:30px;">
+                <div class="col-sm-10">
+                    <div class="input-group">
+                        <span class="input-group-addon">密码：</span>
+                        <input type="password" class="form-control" id="inputPassword3" placeholder="请输入密码" />
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div style="width: 30%;padding: 5px;margin-top:20px;margin-left: 50px;">
+                <div id="login3" class="col-sm-offset-2 col-sm-10">
+                    <button class="btn btn-default">登陆</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    /*登陆*/
+    $("#login3").click(function() {
+        $.ajax({
+            url: "/login",
+            type: 'post',
+            data: {"id": $("#inputUser3").val(), "pwd": $("#inputPassword3").val()},
+            success: function(data) {
+                if(data.status == 200) {
+                    sessionStorage.setItem("username", data.name);
+                    alert("3秒后跳转到首页");
+                    setTimeout(function() {
+                        location.href='http://'+window.location.host+'/index.html';
+                    },3000)
+                }else {
+                    alert('登录名或密码错误')
+                }
+            }
+        })
+    });
+</script>
+</body>
+</html>

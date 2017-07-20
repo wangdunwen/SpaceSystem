@@ -1,0 +1,314 @@
+
+html {
+    height:100%;
+}
+
+body {
+    background: #FFF;
+    padding: 0;
+    margin: 0;
+    width:100%;
+    height:100%;
+    overflow: hidden;
+}
+
+#loadingIndicator h1 {
+    text-align: center;
+    position: relative;
+    color: white;
+    top:55%;
+}
+
+#loadingIndicator {
+    display: inline-block;
+    position: absolute;
+    left:16%;
+    top:17%;
+    width:82.5%;
+    height: 83%;
+    background-color: rgba(0, 0, 0, 1.0);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url("../resources/images/ajax-loader.gif");
+}
+
+.fullSize {
+    display:block;
+    position: absolute;
+    left:16%;
+    top:17%;
+    width:82.5%;
+    height: 83%;
+    margin:0;
+    padding:1px;
+}
+
+.left-panel {
+    margin: 0;
+    padding: 0;
+    width:15%;
+    height:100%;
+    background-color: #424f63;
+    float: left;
+}
+
+.content {
+    float: left;
+    margin: 0;
+    width: 85%;
+    height:100%;
+    background-color: #eff0f4;
+}
+
+.header {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 8%;
+    background-color: white;
+}
+
+.footer {
+    margin:0;
+    padding:0;
+    width:100%;
+    height:7.5%;
+}
+
+.title {
+    display: block;
+    margin-left:-13px;
+    padding:6px;
+    width:100%;
+    height:4%;
+}
+
+.map-contain {
+    display: block;
+    margin:5px;
+    height:85%;
+    width:auto;
+    border-radius: 10px;
+    background-color: black;
+}
+
+.top-panel {
+    margin:20px 20px 30px 10px;
+}
+
+.feature {
+    display: block;
+    width:100%;
+    height:100px;
+    cursor:pointer;
+    color:white;
+    text-align: center;
+    line-height:100px;
+    font-size: x-large;
+    background: url(../resources/images/plus-white.png) no-repeat 90%;
+}
+
+.feature:hover{
+    background: url(../resources/images/plus-blue.png) no-repeat 90%;
+    color: #66ccff;
+}
+
+#layerPanel, #cloudPanel, #locationPanel, #plotPanel, #viewPanel{
+    z-index: 1000;
+    width: 180px;
+    display:none;
+    position: absolute;
+    left: 15.5%;
+    top: 19%;
+    background: #303336;
+    color: white;
+}
+
+.functionPanel {
+    display: none;
+    text-align: center;
+    width:100%;
+    background: #777777;
+}
+
+#docWriteDiv {
+    max-width: 100%;
+    height: 25px;
+    background-color: rgba(0, 70, 140, 0.0);
+    padding: 0;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border-bottom: 0px solid #AFAFAF;
+}
+
+#docWriteDiv input[type="text"] {
+    height: 20px;
+    border-radius: 0;
+    border: 1px solid #fff;
+    padding: 3px;
+    width: 100%;
+}
+
+#docWriteDiv button {
+    height: 28px;
+    border-radius: 0;
+    width: 100%;
+}
+
+#docReadDiv {
+    max-width: 100%;
+    height: 25px;
+    background-color: rgba(0, 70, 140, 0.0);
+    padding: 0;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border-bottom: 0px solid #AFAFAF;
+}
+
+#docReadDiv input[type="text"] {
+    height: 20px;
+    border-radius: 0;
+    border: 1px solid #fff;
+    padding: 3px;
+    width: 100%;
+}
+
+#docReadDiv button {
+    height: 28px;
+    border-radius: 0;
+    width: 100%;
+}
+
+.titleWrite {
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    background-color: rgba(179, 184, 190, 1.0);
+    border: 1px solid #ffffff;
+}
+
+.contentWrite {
+    width: 100%;
+    height: 328px;
+    background-color: white;
+    border: 1px solid #366097;
+}
+
+.endWrite {
+    width: 100%;
+    height: 40px;
+    text-align: center;
+    line-height: 36px;
+}
+
+.contentClass {
+    width: 98.5%;
+    height: 98.5%;
+    font-size: 12px;
+    display: block;
+    autofocus: true;
+}
+
+.contentReadClass {
+    width: 98.5%;
+    height: 98.5%;
+    font-size: 12px;
+    display: block;
+    disabled: true;
+    readonly: true;
+}
+
+#docNewDiv {
+    position: absolute;
+    margin-left: 45%;
+    margin-top: 15%;
+    width: 300px;
+    height: 400px;
+    display: none;
+    background-color: #222222;
+}
+
+#docOpenDiv {
+    position: absolute;
+    margin-left: 45%;
+    margin-top: 15%;
+    width: 300px;
+    height: 400px;
+    display: none;
+    background-color: #222222;
+}
+
+.listView {
+    font-size: 1em;
+}
+
+.listView ul, .listView ul li, #appMain, #searchMain ul li, #dataRetrievalResult ul li {
+    list-style-type: none;
+}
+
+.listView ul, .listView ul li {
+    margin-left: 0px;
+}
+
+.picdiv {
+    position: absolute;
+    margin-left: 73%;
+    margin-top: 15%;
+    width: 280px;
+    height: 300px;
+    display: none;
+}
+
+.picbar {
+    width: 280px;
+    height: 300px;
+    margin: 0px 0px;
+    padding: 1px 0;
+    left: 0;
+    background-color: #222222;
+    overflow-x: auto;
+    overflow-y: auto;
+}
+
+.picbartitle {
+    text-align: center;
+    margin-top: 1px;
+    border: 1px solid #ffffff;
+    background-color: rgba(179, 184, 190, 1.0);
+    width: 100%;
+    height: 25px;
+}
+
+.picbartitle h4 {
+    display: inline-block;
+    font-size: 1.1em;
+    margin: 4px 20px;
+    line-height: 1.2em;
+    color: #3F3F7F;
+    font-family: "??????", Verdana, Arial, Helvetica, sans-serif;
+}
+
+.picDemo {
+    background-color: white;
+    float: left;
+    width: 60px;
+    height: 60px;
+    margin: 3px;
+}
+
+.picButton {
+    opacity: 1;
+}
+
+.picImg {
+    width: 60px;
+    height: 60px;
+}
+
+#trailer {
+    position: absolute;
+    bottom: 75px;
+    right: 0;
+    width: 320px;
+    height: 180px;
+}

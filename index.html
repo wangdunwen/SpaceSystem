@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!--应用占满浏览器，适配屏幕分辨率-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <title>空间数据处理系统</title>
+    <script type="text/javascript" src="libs/jquery/jquery.js"></script>
+    <script type="text/javascript" src="libs/jquery/jcolor.min.js"></script>
+    <script type="text/javascript" src="libs/popup.js"></script>
+    <script type="text/javascript" src="libs/bootstrap/bootstrap.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        // if(sessionStorage.getItem("username") == null) {
+        //     window.location.href="login.html";
+        // }
+    </script>
+    <style>
+        @import url(css/tool.css);
+        @import url(css/menu.css);
+        @import url(libs/Cesium/Widgets/widgets.css);
+        @import url(css/jcolor.min.css);
+        /*@import url(libs/bootstrap/bootstrap-theme.css);*/
+        @import url(libs/bootstrap/bootstrap.css);
+    </style>
+</head>
+<body>
+<div id="container" class="fullSize"></div>
+<div id="loadingIndicator"><h1>loading</h1></div>
+<div class="left-panel">
+    <div class="top-panel">
+        <img src="resources/images/planet_earth.png" style="width:40%;height:40%;margin-left:10%;" id="img_reset"/>
+        <span style="font-size:xx-large;margin-top:30px;margin-bottom:10px;margin-right:10%;color:white;float:right;">GIS</span>
+    </div>
+    <div id="layer" class="feature">
+        <span>图层数据</span>
+    </div>
+    <div id="cloud" class="feature">
+        <span>气象数据</span>
+    </div>
+    <div id="location" class="feature">
+        <span>卫星定位</span>
+    </div>
+    <div id="plot" class="feature">
+        <span>数据标绘</span>
+    </div>
+    <div id="view" class="feature">
+        <span>功能整合</span>
+    </div>
+    <!--<div id="map_reset" class="reset">
+        <img id="img_reset" src="resources/images/reset_on.png" style="width:2.0em;height:2.0em;"/>
+    </div>-->
+</div>
+<div class="content">
+    <div class="header">
+        <input id="search_name" type="text" class="search-input" name="keyword" placeholder="Search here..."/>
+        <img src="resources/images/search_blue.png" class="search-img" id="search"/>
+        <div data-toggle="tooltip" title="退出登录" style="float:right;margin-right:50px;">
+            <img id="login_img" src="resources/images/person.png" class="search-img" data-toggle="modal" data-target="#myModal">
+            <!-- 模态框（Modal） -->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                &times;
+                            </button>
+                            <h4 class="modal-title" id="myModalLabel">
+                                提醒
+                            </h4>
+                        </div>
+                        <div class="modal-body">
+                            确定要退出当前用户么？
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">取消
+                            </button>
+                            <button type="button" class="btn btn-primary" id="ensureToLogout">
+                                确定
+                            </button>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal -->
+            </div>
+        </div>
+        <div style=" margin-top:18px;margin-bottom:12px;float:right;margin-right:20px;">欢迎&nbsp;<span class="label label-info" id="personLogin"></span>&nbsp;登陆!</div>
+        <div id="localSearch">
+            <ul id="ul_list" class="form-control"></ul>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="title">
+            <span class="big-title">空间数据处理系统</span><br/>
+            <div class="input-group" style="float:right;position:absolute;top:10%;left: 50%;width: 20%;display:none;" id="descriptionForEntityDiv">
+                <input type="text" class="form-control" id="descriptionForEntity" placeholder="添加文本描述">
+                <span class="input-group-btn" id="addDescription">
+                    <button class="btn btn-default" type="button">添加描述</button>
+                </span>
+            </div>
+            <button type="button" class="btn btn-primary" id="browserLocation" style="float:right;position:absolute;top:10%;left: 90%;">
+                浏览器定位
+            </button>
+            <!--<span id="map_reset" class="reset">复位<img src="resources/images/reset.png" style="width:1.0em;height:0.9em;"/></span>-->
+        </div>
+    </div>
+    <div class="map-contain"></div>
+</div>
+<!--图层数据-->
+<div id="layerPanel">
+    <div>
+        <button id="cityData" class="mybutton"><h4>高分数据</h4></button>
+        <div id="cityPanel" class="functionPanel">
+            <button id="SZSatellite" class="otherbutton">苏州卫星地图</button>
+            <button id="SZDigital" class="otherbutton">苏州电子地图</button>
+            <button id="BJDigital" class="otherbutton">北京电子地图</button>
+            <button id="clearCity" class="otherbutton">清除高分数据</button>
+        </div>
+    </div>
+    <div>
+        <button id="terrainData" class="mybutton"><h4>高程数据</h4></button>
+        <div id="terrainPanel" class="functionPanel">
+            <button id="openTerrain" class="otherbutton">打开高程</button>
+            <button id="closeTerrain" class="otherbutton">关闭高程</button>
+        </div>
+    </div>
+    <div>
+        <button id="vectorData" class="mybutton"><h4>矢量数据</h4></button>
+        <div id="vectorPanel" class="functionPanel">
+            <button id="chinaVector" class="otherbutton">中国省市边界</button>
+            <button id="jiangsuVector" class="otherbutton">江苏省市边界</button>
+            <button id="clearVector" class="otherbutton">清除矢量数据</button>
+        </div>
+    </div>
+    <div>
+        <button id="onlineMapService" class="mybutton"><h4>在线地图服务</h4></button>
+        <div id="onlineMapPanel" class="functionPanel">
+            <button id="globeVector" class="otherbutton">全球矢量地图</button>
+            <button id="globeImagery" class="otherbutton">全球影像地图</button>
+            <button id="globeNightImagery" class="otherbutton">全球夜间影像地图</button>
+            <button id="clearGlobeImagery" class="otherbutton">清除全球地图</button>
+        </div>
+    </div>
+</div>
+<!--气象数据-->
+<div id="cloudPanel">
+    <div>
+        <button id="simulateCloud" class="mybutton"><h4>模拟云图</h4></button>
+        <div id="simulateCloudPanel" class="functionPanel">
+            <button id="openSimulateCloud" class="otherbutton">打开模拟云图</button>
+            <button id="closeSimulateCloud" class="otherbutton">关闭模拟云图</button>
+        </div>
+    </div>
+    <div>
+        <button id="onlineCloud" class="mybutton"><h4>在线云图</h4></button>
+        <div id="onlineCloudPanel" class="functionPanel">
+            <button id="openOnlineCloud" class="otherbutton">打开在线云图</button>
+            <button id="closeOnlineCloud" class="otherbutton">关闭在线云图</button>
+        </div>
+    </div>
+</div>
+<!--卫星定位-->
+<div id="locationPanel">
+    <div>
+        <button id="locationOnline" class="mybutton"><h4>卫星定位</h4></button>
+        <div id="locationOnlinePanel" class="functionPanel">
+            <div><button id="openLocation" class="otherbutton"><h4>打开卫星定位</h4></button></div>
+            <div><button id="closeLocation" class="otherbutton"><h4>关闭卫星定位</h4></button></div>
+        </div>
+    </div>
+    <div>
+        <button id="routePlan" class="mybutton"><h4>路径规划</h4></button>
+        <div id="routePlanPanel" class="functionPanel">
+            <div><button id="selectStartPoint" class="otherbutton"><h4>选取起始点</h4></button></div>
+            <div><button id="selectEndPoint" class="otherbutton"><h4>选取终点</h4></button></div>
+            <div><button id="walkRoutePlan" class="otherbutton"><h4>步行路径规划</h4></button></div>
+            <div><button id="driveRoutePlan" class="otherbutton"><h4>驾车路径规划</h4></button></div>
+        </div>
+    </div>
+</div>
+<!--数据标绘-->
+<div id="plotPanel">
+    <div>
+        <button id="basePlotPanel" class="mybutton"><h5>基础图形标绘</h5></button>
+        <div id="basePlot" class="functionPanel">
+            <button id="point" class="linebutton" style="width:20%;">点</button>
+            <button id="line" class="linebutton" style="width:20%;background: #646464">线</button>
+            <button id="polygon" class="linebutton" style="width:20%;">区域</button>
+            <button id="rectangle" class="linebutton" style="width:20%;background: #646464">矩形</button>
+            <button id="ellipse" class="linebutton" style="width:20%;">椭圆</button>
+        </div>
+    </div>
+    <div><button class="mybutton" id="picturePlot"><h5>图片数据标绘</h5></button></div>
+    <div><button class="mybutton" id="audioPlot"><h5>音频数据标绘</h5></button></div>
+    <div id="audioPlotPanel" class="functionPanel">
+        <button id="mp3Audio" class="otherbutton">MP3格式</button>
+        <button id="oggAudio" class="otherbutton">OGG格式</button>
+        <button id="wavAudio" class="otherbutton">WAV格式</button>
+        <button id="wmaAudio" class="otherbutton">WMA格式</button>
+        <button class="otherbutton">
+            本地音频
+            <input type="file" name="audio" accept="audio/*" id="localAudio" capture="microphone"
+                   style="position:relative; width:100%;height: 30%;opacity:0;"/>
+        </button>
+    </div>
+    <div><button class="mybutton" id="videoPlot"><h5>视频数据标绘</h5></button></div>
+    <div id="videoPlotPanel" class="functionPanel">
+        <button id="aviVideo" class="otherbutton">AVI格式</button>
+        <button id="flvVideo" class="otherbutton">FLV格式</button>
+        <button id="mp4Video" class="otherbutton">MP4格式</button>
+        <button id="mpgVideo" class="otherbutton">MPG格式</button>
+        <button id="wmvVideo" class="otherbutton">WMV格式</button>
+        <button class="otherbutton">
+            本地视频
+            <input type="file" name="video" accept="video/*" id="localVideo"
+                   style="position:relative; width:100%;height: 30%;opacity:0;"/>
+        </button>
+    </div>
+    <div><button class="mybutton" id="savePlot"><h5>保存标绘</h5></button></div>
+    <div><button class="mybutton" id="openPlot"><h5>推送标绘</h5></button></div>
+    <div><button class="mybutton" id="clearAllPlot"><h5>清空数据标绘</h5></button></div>
+</div>
+<!--信息编辑-->
+<div id="viewPanel">
+    <div><button class="mybutton" id="mediaGlobe"><h4>多媒体地球</h4></button></div>
+    <div id="mediaGlobePanel" class="functionPanel">
+        <button id="openMediaGlobe" class="otherbutton">打开多媒体地球</button>
+        <button id="closeMediaGlobe" class="otherbutton">关闭多媒体地球</button>
+    </div>
+    <div><button class="mybutton" id="textInfo"><h4>文本信息</h4></button></div>
+    <div id="infoPanel" class="functionPanel">
+        <div style="margin-top: 5px;">
+            <input type="text" class="form-control" placeholder="请输入文件名" style="float: left;width: 68%" id="docNameWrite"/>
+            <button type="button" class="btn btn-info" style="float: right;width: 30%" id="docWrite">新建</button>
+        </div>
+        <div style="margin-top: 5px;margin-bottom: 5px;">
+            <input type="text" class="form-control" placeholder="请输入文件名" style="float: left;width: 68%" id="docNameRead"/>
+            <button type="button" class="btn btn-info" style="float: right;width: 30%" id="docRead">打开</button>
+        </div>
+    </div>
+    <div><button class="mybutton" id="helpInfo"><h4>救援信息</h4></button></div>
+    <div id="helpPanel" class="functionPanel">
+        <div id="locationRescure" style="margin-top:10px;margin-bottom:10px;background: #777777">
+            <div style="width: 40%;float: left;">
+                <button type="button" id="getLocation" class="btn btn-primary" style="font-size: 1.0em">获取位置
+                </button>
+            </div>
+            <div id="showLocation" style="width: 58%; float: right;margin-left: 2%;display: none">
+                <div>
+                    <span id="locationLng"></span>
+                </div>
+                <div>
+                    <span id="locationLat"></span>
+                </div>
+            </div>
+        </div>
+        <div id="connectRescure" style="margin-top:10px;margin-bottom:10px;">
+            <div style="width: 70%; float: left;">
+                <input type="text" class="form-control" id="contentRescure" placeholder="输入对方设备ip"/>
+            </div>
+            <div style="width: 30%;float: right;">
+                <button type="button" id="sendRescure" class="btn btn-primary">发送</button>
+            </div>
+        </div>
+    </div>
+    <div><button class="mybutton" id="alarmPublish"><h4>警报发布</h4></button></div>
+    <div id="alarmPanel" class="functionPanel">
+        <button id="alarmType" class="otherbutton">选择警报类型</button>
+        <ul id="warnType" class="list-inline" style="background: #454545; margin-left: 0px;padding: 5px;display: none;">
+            <li><input type="radio" name="typeRadio" id="warnWind" checked><span>台风</span></li>
+            <li><input type="radio" name="typeRadio" id="warnEarthquake"><span>地震</span></li>
+            <li><input type="radio" name="typeRadio" id="warnRain"><span>暴雨</span></li>
+        </ul>
+        <button id="alarmLevel" class="otherbutton" style="margin-top: -5px;">选择警报级别</button>
+        <ul id="warnLevel" class="list-inline" style="background: #454545; margin-left: 0px;padding: 5px;display: none;">
+            <li><input type="radio" name="levelRadio" id="warnRed" checked><span>红色</span></li>
+            <li><input type="radio" name="levelRadio" id="warnOrange"><span>橙色</span></li>
+            <li><input type="radio" name="levelRadio" id="warnBlue"><span>蓝色</span></li>
+        </ul>
+        <div id="connectDiv" style="margin-top:10px;margin-bottom:10px;">
+            <div style="width: 70%; float: left;">
+                <input type="text" class="form-control" id="contentIp" placeholder="输入目标地点"/>
+            </div>
+            <div style="width: 30%;float: right;">
+                <button type="button" id="sendWarn" class="btn btn-primary">发送</button>
+            </div>
+        </div>
+    </div>
+    <div><button class="mybutton" id="matePathDiv"><h4>模拟轨迹</h4></button></div>
+    <div id="matePathPanel" class="functionPanel">
+        <button id="openMatePath" class="otherbutton">打开模拟轨迹</button>
+        <button id="closeMatePath" class="otherbutton">关闭模拟轨迹</button>
+    </div>
+    <div><button class="mybutton" id="touristDaily"><h4>旅游日记</h4></button></div>
+    <div id="touristPanel" class="functionPanel">
+        <button id="generateRoute" class="otherbutton">我的足迹</button>
+    </div>
+</div>
+<!--描述面板-->
+<div id="descriptionPanel">
+    <span id="description"></span>
+</div>
+
+<!--路径规划面板-->
+<div id="descriptionRoutePlanPanel">
+    <span id="descriptionRoutePlan"></span>
+</div>
+
+<!--文档编拟-->
+<div id="docNewDiv">
+    <div class="titleWrite"><span style="margin-left:3px;font-size: 1.2em;color: #3F3F7F;">文件名：</span>
+        <span id="docTitleWrite"
+              style="display: inline-block;font-size: 1.3em;color: black;text-align: center;margin-left:20%"></span>
+    </div>
+    <div class="contentWrite">
+        <textarea id="docContent" class="contentClass" placeholder="请输入内容"></textarea>
+    </div>
+    <div class="endWrite">
+        <button id="escDoc" class="btn btn-primary">取消</button>
+        <button id="sendDoc" class="btn btn-primary">发送</button>
+    </div>
+</div>
+
+<div id="docOpenDiv">
+    <div class="titleWrite"><span style="margin-left:3px;font-size: 1.2em;color: #3F3F7F;">文件名：</span>
+        <span id="docTitleRead"
+              style="display: inline-block;font-size: 1.3em;color: black;text-align: center;margin-left:20%"></span>
+    </div>
+    <div class="contentWrite">
+        <textarea id="docContentRead" class="contentReadClass"></textarea>
+    </div>
+    <div class="endWrite">
+        <button id="closeDoc" class="btn btn-primary">关闭</button>
+    </div>
+</div>
+
+<!--背景音乐-->
+<div id="bg_music" style="display:none;"></div>
+
+<div id="htmlContainer"></div>
+
+<div class="panel panel-warning" id="distanceRoutePanel" style="width: 180px;
+    display:none;
+    position: absolute;
+    left: 16%;
+    top: 70%;
+    padding: 5px;
+    background-color: #f7e1b5;
+    border-radius: 15px;">
+    <div class="panel-body" id="distanceRouteDiv">
+
+    </div>
+</div>
+
+<!--在线云图面板-->
+<div id="onlineCloudDiv">
+    <div class="input-group">
+        <div class="input-group-btn">
+            <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
+                选择观测点
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" id="watchPoint" style="height:200px;overflow:auto;">
+
+            </ul>
+        </div><!-- /btn-group -->
+        <input type="text" class="form-control" disabled="disabled" id="cloudPoint" value="青浦"/>
+    </div><!-- /input-group -->
+    <button type="button" class="btn btn-info" style="margin-top:10px;margin-left: 5px;" id="getOnlineCloud">
+        获取该站点雷达基本反射率图像
+    </button>
+</div>
+
+<video id="trailer" style="display: none;" autoplay="" loop="" crossorigin="" controls="">
+
+    Your browser does not support the <code>video</code> element.
+</video>
+
+<script type="text/javascript" src="libs/Cesium/Cesium.js"></script>
+<script type="text/javascript" src="js/init.js"></script>
+<script type="text/javascript" src="libs/requirejs-2.1.20/require.min.js" data-main="js/app.js"></script>
+</body>
+</html>

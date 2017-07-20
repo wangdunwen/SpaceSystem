@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!--应用占满浏览器，适配屏幕分辨率-->
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
+    <title>空间数据处理系统</title>
+    <script type="text/javascript" src="libs/jquery/jquery.js"></script>
+    <script type="text/javascript" src="libs/jquery/jcolor.min.js"></script>
+    <style>
+        @import url(css/tool.css);
+        @import url(css/menu.css);
+        @import url(libs/Cesium/Widgets/widgets.css);
+        @import url(css/jcolor.min.css);
+    </style>
+</head>
+<body>
+<div id="container" class="fullSize"></div>
+<div id="loadingIndicator"><h1>loading</h1></div>
+<div class="left-panel">
+    <div class="top-panel">
+        <img src="resources/images/planet_earth.png" style="width:40%;height:40%;margin-left:10%">
+        <span style="font-size:xx-large;margin-top:30px;margin-bottom:10px;margin-right:10%;color:white;float:right">GIS</span>
+    </div>
+    <div id="layer" class="feature">
+        <span>图层数据</span>
+    </div>
+    <div id="cloud" class="feature">
+        <span>气象数据</span>
+    </div>
+    <div id="location" class="feature">
+        <span>卫星定位</span>
+    </div>
+    <div id="plot" class="feature">
+        <span>数据标绘</span>
+    </div>
+    <div id="view" class="feature">
+        <span>信息编辑</span>
+    </div>
+    <div id="map_reset" class="reset">
+        <img id="img_reset" src="resources/images/reset_on.png" style="width:2.0em;height:2.0em">
+    </div>
+</div>
+<div class="content">
+    <div class="header">
+        <input id="search_name" type="text" class="search-input" name="keyword" placeholder="Search here...">
+        <img src="resources/images/search_blue.png" class="search-img" id="search">
+        <div id="localSearch">
+            <ul id="ul_list" class="form-control"></ul>
+        </div>
+        <img id="login_img" src="resources/images/person.png" class="search-img" style="float:right;margin-right:20px">
+    </div>
+    <div class="footer">
+        <div class="title">
+            <span class="big-title">空间数据处理系统</span><br>
+            <!--<span id="map_reset" class="reset">复位<img src="resources/images/reset.png" style="width:1.0em;height:0.9em;"/></span>-->
+        </div>
+    </div>
+    <div class="map-contain"></div>
+</div>
+<!--图层数据-->
+<div id="layerPanel">
+    <div>
+        <button id="cityData" class="mybutton"><h3>高分数据</h3></button>
+        <div id="cityPanel" class="functionPanel">
+            <button id="SZSatellite" class="otherbutton">苏州卫星地图</button>
+            <button id="SZDigital" class="otherbutton">苏州电子地图</button>
+            <button id="clearCity" class="otherbutton">清除高分数据</button>
+        </div>
+    </div>
+    <div>
+        <button id="terrainData" class="mybutton"><h3>高程数据</h3></button>
+        <div id="terrainPanel" class="functionPanel">
+            <button id="openTerrain" class="otherbutton">打开高程</button>
+            <button id="closeTerrain" class="otherbutton">关闭高程</button>
+        </div>
+    </div>
+    <div>
+        <button id="vectorData" class="mybutton"><h3>矢量数据</h3></button>
+        <div id="vectorPanel" class="functionPanel">
+            <button id="chinaVector" class="otherbutton">中国省市边界</button>
+            <button id="jiangsuVector" class="otherbutton">江苏省市边界</button>
+            <button id="clearVector" class="otherbutton">清除矢量数据</button>
+        </div>
+    </div>
+</div>
+<!--气象数据-->
+<div id="cloudPanel">
+    <div><button id="openCloud" class="mybutton"><h3>打开云图</h3></button></div>
+    <div><button id="closeCloud" class="mybutton"><h3>关闭云图</h3></button></div>
+</div>
+<!--卫星定位-->
+<div id="locationPanel">
+    <div><button id="openLocation" class="mybutton"><h3>打开卫星定位</h3></button></div>
+    <div><button id="closeLocation" class="mybutton"><h3>关闭卫星定位</h3></button></div>
+</div>
+<!--数据标绘-->
+<div id="plotPanel">
+    <div>
+        <button id="basePlotPanel" class="mybutton"><h3>基础图形标绘</h3></button>
+        <div id="basePlot" class="functionPanel">
+            <button id="point" class="linebutton" style="width:20%">点</button>
+            <button id="line" class="linebutton" style="width:20%;background: #646464">线</button>
+            <button id="polygon" class="linebutton" style="width:20%">区域</button>
+            <button id="rectangle" class="linebutton" style="width:20%;background: #646464">矩形</button>
+            <button id="ellipse" class="linebutton" style="width:20%">椭圆</button>
+        </div>
+    </div>
+    <div><button class="mybutton"><h3>图片数据标绘</h3></button></div>
+    <div><button class="mybutton"><h3>音频数据标绘</h3></button></div>
+    <div><button class="mybutton"><h3>视频数据标绘</h3></button></div>
+    <div><button class="mybutton"><h3>保存标绘</h3></button></div>
+    <div><button class="mybutton"><h3>推送标绘</h3></button></div>
+    <div><button class="mybutton"><h3>清空数据标绘</h3></button></div>
+</div>
+<!--信息编辑-->
+<div id="viewPanel">
+    <div><button class="mybutton"><h3>文本信息</h3></button></div>
+    <div><button class="mybutton"><h3>救援信息</h3></button></div>
+</div>
+<!--描述面板-->
+<div id="descriptionPanel">
+    <span id="description"></span>
+</div>
+<script type="text/javascript" src="libs/Cesium/Cesium.js"></script>
+<script type="text/javascript" src="js/init.js"></script>
+<script type="text/javascript" src="libs/requirejs-2.1.20/require.min.js" data-main="js/app.js"></script>
+<script type="text/javascript" src="libs/popup.js"></script>
+</body>
+</html>

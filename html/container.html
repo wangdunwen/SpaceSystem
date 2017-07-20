@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html>
+<body>
+<!--图片标绘-->
+<div id="picPanel" class="picdiv">
+    <div style="margin-top: 100px; float:left;width: 100%;height: 300px;border:1px ">
+        <div class="picbartitle"><h4>图片</h4></div>
+        <div class="picbar" id="picBarDiv">
+            <div class="picDemo">
+                <button type="button" id="take_photo" class="picButton" title="picture">
+                    <img src="resources/images/camera.png" class="picImg" style="margin-right: 15%;z-index:1001;">
+                    <input type="file" name="image" accept="image/*" capture style="position:relative; width:1%;height: 100%;margin-top: -70%;left: 5%;opacity: 0;z-index:1000;" onchange="savePhotoInLocal(this)"/>
+                </button>
+            </div>
+            <div class="picDemo">
+                <button type="button" id="local_photo" class="picButton" title="picture">
+                    <img src="resources/images/local_photo.png" class="picImg" style="margin-right: 15%;z-index:1001;">
+                    <input type="file" name="image" accept="image/*"  style="position:relative; width: 1%;height:100%;margin-top: -70%;left: 5%;opacity: 0;border:none;z-index: 1000;" onchange="savePhotoInLocal(this)"/>
+                </button>
+            </div>
+            <div class="picDemo">
+                <button type="button" id="pic1" class="picButton" title="picture">
+                    <img src="resources/pic/pic_thumbnail/pic(1).png" class="picImg">
+                </button>
+            </div>
+            <div class="picDemo">
+                <button type="button" id="pic2" class="picButton" title="picture">
+                    <img src="resources/pic/pic_thumbnail/pic(2).png" class="picImg">
+                </button>
+            </div>
+            <div class="picDemo">
+                <button type="button" id="pic3" class="picButton" title="picture">
+                    <img src="resources/pic/pic_thumbnail/pic(3).png" class="picImg">
+                </button>
+            </div>
+            <div class="picDemo">
+                <button type="button" id="pic4" class="picButton" title="picture">
+                    <img src="resources/pic/pic_thumbnail/pic(4).png" class="picImg">
+                </button>
+            </div>
+            <div class="picDemo">
+                <button type="button" id="pic5" class="picButton" title="picture">
+                    <img src="resources/pic/pic_thumbnail/pic(5).png" class="picImg">
+                </button>
+            </div>
+            <div class="picDemo">
+                <button type="button" id="pic6" class="picButton" title="picture">
+                    <img src="resources/pic/pic_thumbnail/pic(6).png" class="picImg">
+                </button>
+            </div>
+            <div class="picDemo">
+                <button type="button" id="pic7" class="picButton" title="picture">
+                    <img src="resources/pic/pic_thumbnail/pic(7).png" class="picImg">
+                </button>
+            </div>
+            <div class="picDemo">
+                <button type="button" id="pic8" class="picButton" title="picture">
+                    <img src="resources/pic/pic_thumbnail/pic(8).png" class="picImg">
+                </button>
+            </div>
+            <div class="picDemo">
+                <button type="button" id="pic9" class="picButton" title="picture">
+                    <img src="resources/pic/pic_thumbnail/pic(9).png" class="picImg">
+                </button>
+            </div>
+            <div class="picDemo">
+                <button type="button" id="pic10" class="picButton" title="picture">
+                    <img src="resources/pic/pic_thumbnail/pic(10).png" class="picImg">
+                </button>
+            </div>
+            <div class="picDemo">
+                <button type="button" id="pic11" class="picButton" title="picture">
+                    <img src="resources/pic/pic_thumbnail/pic(11).png" class="picImg">
+                </button>
+            </div>
+            <div class="picDemo">
+                <button type="button" id="pic12" class="picButton" title="picture">
+                    <img src="resources/pic/pic_thumbnail/pic(12).png" class="picImg">
+                </button>
+            </div>
+            <div class="picDemo">
+                <button type="button" id="pic13" class="picButton" title="picture">
+                    <img src="resources/pic/pic_thumbnail/pic(13).png" class="picImg">
+                </button>
+            </div>
+            <div class="picDemo">
+                <button type="button" id="pic14" class="picButton" title="picture">
+                    <img src="resources/pic/pic_thumbnail/pic(14).png" class="picImg">
+                </button>
+            </div>
+            <div class="picDemo">
+                <button type="button" id="pic15" class="picButton" title="picture">
+                    <img src="resources/pic/pic_thumbnail/pic(15).png" class="picImg">
+                </button>
+            </div>
+            <div class="picDemo">
+                <button type="button" id="pic16" class="picButton" title="picture">
+                    <img src="resources/pic/pic_thumbnail/pic(16).png" class="picImg">
+                </button>
+            </div>
+            <div class="picDemo">
+                <button type="button" id="pic17" class="picButton" title="picture">
+                    <img src="resources/pic/pic_thumbnail/pic(17).png" class="picImg">
+                </button>
+            </div>
+            <div class="picDemo">
+                <button type="button" id="pic18" class="picButton" title="picture">
+                    <img src="resources/pic/pic_thumbnail/pic(18).png" class="picImg">
+                </button>
+            </div>
+            <div class="picDemo">
+                <button type="button" id="pic19" class="picButton" title="picture">
+                    <img src="resources/pic/pic_thumbnail/pic(19).png" class="picImg">
+                </button>
+            </div>
+            <div class="picDemo">
+                <button type="button" id="pic20" class="picButton" title="picture">
+                    <img src="resources/pic/pic_thumbnail/pic(20).png" class="picImg">
+                </button>
+            </div>
+            <div class="picDemo">
+                <button type="button" id="pic21" class="picButton" title="picture">
+                    <img src="resources/pic/pic_thumbnail/pic(21).png" class="picImg">
+                </button>
+            </div>
+            <div class="picDemo">
+                <button type="button" id="pic22" class="picButton" title="picture">
+                    <img src="resources/pic/pic_thumbnail/pic(22).png" class="picImg">
+                </button>
+            </div>
+            <div class="picDemo">
+                <button type="button" id="pic23" class="picButton" title="picture">
+                    <img src="resources/pic/pic_thumbnail/pic(23).png" class="picImg">
+                </button>
+            </div>
+            <div class="picDemo">
+                <button type="button" id="pic24" class="picButton" title="picture">
+                    <img src="resources/pic/pic_thumbnail/pic(24).png" class="picImg">
+                </button>
+            </div>
+            <div class="picDemo">
+                <button type="button" id="pic25" class="picButton" title="picture">
+                    <img src="resources/pic/pic_thumbnail/pic(25).png" class="picImg">
+                </button>
+            </div>
+            <div class="picDemo">
+                <button type="button" id="pic26" class="picButton" title="picture">
+                    <img src="resources/pic/pic_thumbnail/pic(26).png" class="picImg">
+                </button>
+            </div>
+            <div class="picDemo">
+                <button type="button" id="pic27" class="picButton" title="picture">
+                    <img src="resources/pic/pic_thumbnail/pic(27).png" class="picImg">
+                </button>
+            </div>
+            <div class="picDemo">
+                <button type="button" id="pic28" class="picButton" title="picture">
+                    <img src="resources/pic/pic_thumbnail/pic(28).png" class="picImg">
+                </button>
+            </div>
+            <div class="picDemo">
+                <button type="button" id="pic29" class="picButton" title="picture">
+                    <img src="resources/pic/pic_thumbnail/pic(29).png" class="picImg">
+                </button>
+            </div>
+            <div class="picDemo">
+                <button type="button" id="pic30" class="picButton" title="picture">
+                    <img src="resources/pic/pic_thumbnail/pic(30).png" class="picImg">
+                </button>
+            </div>
+            <div class="picDemo">
+                <button type="button" id="pic31" class="picButton" title="picture">
+                    <img src="resources/pic/pic_thumbnail/pic(31).png" class="picImg">
+                </button>
+            </div>
+            <div class="picDemo">
+                <button type="button" id="pic32" class="picButton" title="picture">
+                    <img src="resources/pic/pic_thumbnail/pic(32).png" class="picImg">
+                </button>
+            </div>
+            <div class="picDemo">
+                <button type="button" id="pic33" class="picButton" title="picture">
+                    <img src="resources/pic/pic_thumbnail/pic(33).png" class="picImg">
+                </button>
+            </div>
+            <div class="picDemo">
+                <button type="button" id="pic34" class="picButton" title="picture">
+                    <img src="resources/pic/pic_thumbnail/pic(34).png" class="picImg">
+                </button>
+            </div>
+            <div class="picDemo">
+                <button type="button" id="pic35" class="picButton" title="picture">
+                    <img src="resources/pic/pic_thumbnail/pic(35).png" class="picImg">
+                </button>
+            </div>
+            <div class="picDemo">
+                <button type="button" id="pic36" class="picButton" title="picture">
+                    <img src="resources/pic/pic_thumbnail/pic(36).png" class="picImg">
+                </button>
+            </div>
+            <div class="picDemo">
+                <button type="button" id="pic37" class="picButton" title="picture">
+                    <img src="resources/pic/pic_thumbnail/pic(37).png" class="picImg">
+                </button>
+            </div>
+            <div class="picDemo">
+                <button type="button" id="pic38" class="picButton" title="picture">
+                    <img src="resources/pic/pic_thumbnail/pic(38).png" class="picImg">
+                </button>
+            </div>
+            <div class="picDemo">
+                <button type="button" id="pic39" class="picButton" title="picture">
+                    <img src="resources/pic/pic_thumbnail/pic(39).png" class="picImg">
+                </button>
+            </div>
+            <div class="picDemo">
+                <button type="button" id="pic40" class="picButton" title="picture">
+                    <img src="resources/pic/pic_thumbnail/pic(40).png" class="picImg">
+                </button>
+            </div>
+            <div class="picDemo">
+                <button type="button" id="pic41" class="picButton" title="picture">
+                    <img src="resources/pic/pic_thumbnail/pic(41).png" class="picImg">
+                </button>
+            </div>
+            <div class="picDemo">
+                <button type="button" id="pic42" class="picButton" title="picture">
+                    <img src="resources/pic/pic_thumbnail/pic(42).png" class="picImg">
+                </button>
+            </div>
+            <div class="picDemo">
+                <button type="button" id="pic43" class="picButton" title="picture">
+                    <img src="resources/pic/pic_thumbnail/pic(43).png" class="picImg">
+                </button>
+            </div>
+            <div class="picDemo">
+                <button type="button" id="pic44" class="picButton" title="picture">
+                    <img src="resources/pic/pic_thumbnail/pic(44).png" class="picImg">
+                </button>
+            </div>
+            <div class="picDemo">
+                <button type="button" id="pic45" class="picButton" title="picture">
+                    <img src="resources/pic/pic_thumbnail/pic(45).png" class="picImg">
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="broadcastPanel"
+     style="margin-top: 200px; float:left;left:35%;top:70%;width: 50%;height: 180px;margin-left:56px;border:1px;display:none;">
+</div>
+
+<img src="" id="loc_img" style="display: none"/>
+
+<!--videobroadcast-->
+<div id="videobroadcast"
+     style="z-index:1001;position: absolute;width: 100%; height: 100%;display:none;background-color: rgba(41,36,33,0.905);">
+    <img id="videoClose" src="resources/images/btn_close.png"
+         style="position:absolute;width:30px;height:30px;right:5px;top:20px;">
+
+    <div id="videoDisplay">
+    </div>
+</div>
+<!--以上功能OK-->
+<!--实体编辑-->
+<div id="editMark">
+    <span id="editBtn"></span>
+</div>
+
+<script>
+    function savePhotoInLocal(event) {
+        var file;
+        for(var i=0; i<event.files.length; i++) {
+            file = event.files[i];
+            transferLocalPhoto(file);
+        }
+    }
+
+    function transferLocalPhoto(file) {
+        var fileName = file.name;
+
+        //保存缩略图
+        var reader_url = new FileReader();
+        reader_url.readAsDataURL(file);
+        reader_url.onload = function(e) {
+            /*var temp = document.getElementById("loc_img");
+            temp.src = this.result;
+            var width;
+            var height;
+            var flag = temp.width > temp.height ? temp.width /500.0 : temp.height /500.0;
+            if(flag < 1) {
+                flag = 1;
+            }
+            width = temp.width / flag;
+            height = temp.height / flag;*/
+
+            var img = new Image;
+            var quality = 0.2;
+            var canvas = document.createElement("canvas");
+            var drawer = canvas.getContext("2d");
+            img.src = this.result;
+            canvas.width = 150;
+            canvas.height = 150;
+            drawer.drawImage(img, 0, 0, canvas.width, canvas.height);
+            var base64 = canvas.toDataURL("image/jpeg", quality);
+            var basetemp = base64.split(",");
+            var base = basetemp[1];
+            $.ajax({
+                type: "POST",
+                url: "/saveThnPicture",
+                data: {filename: "resources/pic/pic_thumbnail/" + fileName, data: base},
+                success: function (data) {
+                    console.log("保存缩略图成功");
+                }
+            })
+        }
+
+        //保存原图
+        var reader_url = new FileReader();
+        reader_url.readAsDataURL(file);
+        reader_url.onload = function(e) {
+            var temp = document.getElementById("loc_img");
+            temp.src = this.result;
+            var width;
+            var height;
+            var flag = temp.width > temp.height ? temp.width /500.0 : temp.height /500.0;
+            if(flag < 1) {
+                flag = 1;
+            }
+            width = temp.width / flag;
+            height = temp.height / flag;
+
+            var img = new Image;
+            var quality = 0.8;
+            var canvas = document.createElement("canvas");
+            var drawer = canvas.getContext("2d");
+            img.src = this.result;
+            canvas.width = width;
+            canvas.height = height;
+            drawer.drawImage(img, 0, 0, canvas.width, canvas.height);
+            var base64 = canvas.toDataURL("image/jpeg", quality);
+            var basetemp = base64.split(",");
+            var base = basetemp[1];
+            $.ajax({
+                type: "POST",
+                url: "/savePicture",
+                data: {filename: "resources/pic/" + fileName,data: base},
+                success: function (data) {
+                    console.log("保存原图成功");
+                    fileName = fileName.toString();
+                    $("#picBarDiv").append('' +
+                            '<div class="picDemo">' +
+                                '<button type="button" class="picButton" title="' +fileName +'" onclick="addPicture(this)">' +
+                                    '<img src="resources/pic/' + fileName + '" class="picImg">' +
+                                '</button>' +
+                            '</div>');
+                }
+            })
+        }
+    }
+
+    var scene = viewer.scene;
+    var that = this;
+    this.PictureHandler = new Cesium.ScreenSpaceEventHandler(scene.canvas);
+    function addPicture(object) {
+        var pointer = pictureArray.length;
+        var ellipsoid = scene.globe.ellipsoid;
+        var name = object.title;
+        if (that.PictureHandler.isDestroyed()) {
+            return;
+        }
+        that.PictureHandler.setInputAction(function (event) {
+            var windowPosition = getPosition(event);
+            var cartesian = viewer.camera.pickEllipsoid(windowPosition, ellipsoid);
+            /*缩略图路径*/
+            var fileUrl = "resources/pic/pic_thumbnail/" + name ;
+            /*原图路径*/
+            var fileDescription = "resources/pic/" + name ;
+
+            var temp = viewer.entities.add({
+                name: "picture",
+                position: cartesian,
+                HDPic: fileDescription,
+                billboard: {
+                    scale: 0.15,//缩小图片比例
+                    image: fileUrl
+                }
+            });
+            /*保存图片*/
+            var objectTemp = {
+                position: cartesian,
+                url: fileUrl, /*缩略图路径*/
+                rawUrl: fileDescription/*原图路径*/
+            }
+            plotObject.entity.image.push(objectTemp);
+            pictureArray[pointer++] = temp;
+            that.destroy(viewer);
+        }, Cesium.ScreenSpaceEventType.LEFT_DOWN);
+        $("#picPanel").hide();
+    }
+    this.destroy = function(viewer) {
+        var scene = viewer.scene;
+        // 设置可拖动
+        scene.screenSpaceCameraController.enableRotate = true;
+        scene.screenSpaceCameraController.enableInputs = true;
+        if (!this.PictureHandler.isDestroyed()) {
+            this.PictureHandler.destroy();
+        }
+    }
+</script>
+</body>
+</html>
